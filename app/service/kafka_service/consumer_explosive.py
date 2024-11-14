@@ -3,13 +3,10 @@ from dotenv import load_dotenv
 from kafka import KafkaConsumer
 import json
 
-from app.database.connect import emails
-
-# Load environment variables
-load_dotenv()
-def process_emails():
+load_dotenv(verbose=True)
+def process_explosive_messages():
     consumer = KafkaConsumer(
-        os.getenv('TOPIC_MESSAGES_ALL_NAME', 'emails'),
+        os.getenv('TOPIC_MESSAGES_EXPLOSIVE_NAME'),
         bootstrap_servers=os.getenv('BOOTSTRAP_SERVERS'),
         auto_offset_reset='earliest',
         enable_auto_commit=True,
@@ -17,12 +14,11 @@ def process_emails():
         value_deserializer=lambda x: json.loads(x.decode('utf-8'))
     )
 
-    print("Starting email consumer...")
+    print("Starting explosive consumer...")
     try:
         for message in consumer:
             email_data = message.value
-            emails.insert_one(email_data)
-            print(f"Email saved to database: {email_data}")
+            print(f"Explosive saved to database: {email_data}")
     except Exception as e:
         print(f"Consumer error: {e}")
     finally:
@@ -30,6 +26,6 @@ def process_emails():
 
 if __name__ == '__main__':
     try:
-        process_emails()
+        process_explosive_messages()
     except KeyboardInterrupt:
         print("\nShutting down consumer...")

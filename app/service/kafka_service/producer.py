@@ -15,4 +15,26 @@ def publish_email(email_data):
         value=email_data
     )
     producer.flush()
-    print(f'published data: {email_data}')
+
+def publish_explosive(email_data):
+    producer = KafkaProducer(
+        bootstrap_servers=os.environ['BOOTSTRAP_SERVERS'],
+        value_serializer=lambda v: json.dumps(v).encode('utf-8'),
+    )
+    producer.send(
+        os.environ['TOPIC_MESSAGES_EXPLOSIVE_NAME'],
+        value=email_data
+    )
+    producer.flush()
+
+def publish_hostage(email_data):
+    producer = KafkaProducer(
+        bootstrap_servers=os.environ['BOOTSTRAP_SERVERS'],
+        value_serializer=lambda v: json.dumps(v).encode('utf-8'),
+    )
+    producer.send(
+        os.environ['TOPIC_MESSAGES_HOSTAGE_NAME'],
+        value=email_data
+    )
+    producer.flush()
+
