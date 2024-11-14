@@ -3,7 +3,6 @@ from sqlalchemy.orm import joinedload
 from app.database.psql_connect import session_maker
 from app.models import User, HostageSentence, ExplosiveSentence
 
-
 def get_user_by_email(email):
     try:
         with session_maker() as session:

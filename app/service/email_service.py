@@ -1,5 +1,4 @@
 from collections import Counter
-
 from app.repository.email_repository import get_user_by_email, get_all_sentences
 from app.service.kafka_service.producer import publish_explosive, publish_hostage
 from dictalchemy.utils import asdict

@@ -1,8 +1,6 @@
 from sqlalchemy import Column, Integer, ForeignKey, Text
 from sqlalchemy.orm import relationship
-
 from app.models import Base
-
 
 class ExplosiveSentence(Base):
     __tablename__ = 'explosive_sentences'

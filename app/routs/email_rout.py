@@ -1,9 +1,4 @@
-from collections import Counter
 from flask import request, jsonify, Blueprint
-from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.orm import joinedload
-from app.database.psql_connect import session_maker
-from app.models import User, HostageSentence, ExplosiveSentence
 from app.service.email_service import check_if_contains_suspicious_content, get_suspicious_content, get_most_common_word
 from app.service.kafka_service.producer import publish_email
 

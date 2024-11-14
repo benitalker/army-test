@@ -37,4 +37,3 @@ def publish_hostage(email_data):
         value=email_data
     )
     producer.flush()
-

@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 from kafka import KafkaConsumer
 import json
-
 from app.repository.User_repository import insert_user
 
 load_dotenv(verbose=True)
