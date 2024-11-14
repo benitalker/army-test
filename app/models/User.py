@@ -9,8 +9,8 @@ class User(Base):
     username = Column(String, nullable=False, unique=True)
     email = Column(String, nullable=False, unique=True)
 
-    device_info = relationship("DeviceInfo", back_populates="user", uselist=False)
-    location = relationship("Location", back_populates="user", uselist=False)
+    device_info = relationship("DeviceInfo", back_populates="user",uselist=False)
+    location = relationship("Location", back_populates="user",uselist=False)
 
     hostage_sentences = relationship("HostageSentence", back_populates="user")
     explosive_sentences = relationship("ExplosiveSentence", back_populates="user")
