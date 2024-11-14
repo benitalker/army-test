@@ -1,7 +1,7 @@
 from app.service.kafka_service.producer import publish_explosive, publish_hostage
 
 def reorder_sentences(email):
-    suspicious_keywords = ["explosive", "hostage"]
+    suspicious_keywords = ["explosi", "hostage"]
     reordered_sentences = sorted(
         email.get('sentences', []),
         key=lambda sentence: any(keyword in sentence for keyword in suspicious_keywords),
@@ -11,7 +11,7 @@ def reorder_sentences(email):
 
 def check_if_contains_suspicious_content(email):
     for sentence in email.get('sentences', []):
-        if "explosive" in sentence:
+        if "explos" in sentence:
             reorder_sentences(email)
             publish_explosive(email)
             return

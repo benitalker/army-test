@@ -27,7 +27,7 @@ def create_device_info(device_data, user):
 
 def process_sentences(sentences, user):
     for i, sentence in enumerate(sentences):
-        if 'explosive' in sentence:
+        if 'explos' in sentence:
             explosive_sentence = ExplosiveSentence(sentence=sentence, user=user)
             user.explosive_sentences.append(explosive_sentence)
 
@@ -40,7 +40,6 @@ def process_sentences(sentences, user):
 
             for next_sentence in sentences[i + 1:i + 3]:
                 user.hostage_sentences.append(HostageSentence(sentence=next_sentence, user=user))
-
 
 def save_user_to_db(session, user):
     try:
