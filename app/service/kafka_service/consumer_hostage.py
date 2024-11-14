@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 from kafka import KafkaConsumer
 import json
 
+from app.repository.User_repository import insert_user
+
 load_dotenv(verbose=True)
 def process_hostage_messages():
     consumer = KafkaConsumer(
@@ -18,6 +20,7 @@ def process_hostage_messages():
     try:
         for message in consumer:
             email_data = message.value
+            insert_user(email_data)
             print(f"Hostage saved to database: {email_data}")
     except Exception as e:
         print(f"Consumer error: {e}")
