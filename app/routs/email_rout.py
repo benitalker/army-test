@@ -43,25 +43,25 @@ def get_suspicious_content(email):
     except SQLAlchemyError as e:
         return jsonify({"error": str(e)}), 500
 
-# @app.route('/api/most_common_word', methods=['GET'])
-# def get_most_common_word():
-#     try:
-#         with session_maker() as session:
-#             all_sentences = (
-#                 session.query(HostageSentence.sentence)
-#                 .union(session.query(ExplosiveSentence.sentence))
-#                 .all()
-#             )
-#             words = [word.lower() for sentence in all_sentences for word in sentence[0].split()]
-#             word_counts = Counter(words).most_common(1)
-#
-#             if word_counts:
-#                 most_common_word, frequency = word_counts[0]
-#                 return jsonify({"most_common_word": most_common_word, "frequency": frequency})
-#             else:
-#                 return jsonify({"message": "No words found"}), 404
-#     except SQLAlchemyError as e:
-#         return jsonify({"error": str(e)}), 500
+@app.route('/api/most_common_word', methods=['GET'])
+def get_most_common_word():
+    try:
+        with session_maker() as session:
+            all_sentences = (
+                session.query(HostageSentence.sentence)
+                .union(session.query(ExplosiveSentence.sentence))
+                .all()
+            )
+            words = [word.lower() for sentence in all_sentences for word in sentence[0].split()]
+            word_counts = Counter(words).most_common(1)
+
+            if word_counts:
+                most_common_word, frequency = word_counts[0]
+                return jsonify({"most_common_word": most_common_word, "frequency": frequency})
+            else:
+                return jsonify({"message": "No words found"}), 404
+    except SQLAlchemyError as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run()
