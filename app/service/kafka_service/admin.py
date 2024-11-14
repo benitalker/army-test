@@ -9,9 +9,9 @@ load_dotenv(verbose=True)
 def init_topics():
     client = KafkaAdminClient(bootstrap_servers=os.environ['BOOTSTRAP_SERVERS'])
     topic_names = [
-        os.environ['TOPIC_GYM_MEMBERSHIP_NAME'],
-        os.environ['TOPIC_GYM_CLASSES_NAME'],
-        os.environ['TOPIC_GYM_EQUIPMENT_NAME'],
+        os.environ['TOPIC_MESSAGES_ALL_NAME'],
+        os.environ['TOPIC_MESSAGES_HOSTAGE_NAME'],
+        os.environ['TOPIC_MESSAGES_EXPLOSIVE_NAME'],
     ]
     topics = [
         NewTopic(

@@ -1,22 +1,18 @@
 from flask import Flask, request, jsonify
-from app.database.connect import emails
+from app.service.kafka_service.producer import publish_email
 
 app = Flask(__name__)
 
 @app.route('/api/email', methods=['POST'])
 def receive_email():
-    data = request.get_json()
+    email_data= request.get_json()
 
-    if data is None:
+    if email_data is None:
         return jsonify({"error": "Invalid JSON data"}), 400
 
-    result = emails.insert_one(data)
+    publish_email(email_data)
 
-    data["_id"] = str(result.inserted_id)
-
-    return jsonify({
-        data
-    }), 200
+    return jsonify(email_data), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
